@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Employee, EmployeeService} from '../employee.service';
 
 @Component({
   selector: 'employee-new',
@@ -7,21 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeNewComponent implements OnInit {
 
-  name = 'anderson';
-  employees = [];
+    employee: Employee = {
+        name: 'anderson',
+        salary: 0,
+        bonus: 0
+    };
 
-  constructor() {
-    setTimeout(() => {
-      this.name = 'School of Net';
-    }, 3000);
+  constructor(private employeeServce: EmployeeService) {
+    // setTimeout(() => {
+    //   this.name = 'School of Net';
+    // }, 3000);
   }
 
   ngOnInit() {
   }
 
   addEmployee(event){
-    this.employees.push(this.name);
-    console.log(this.employees);
-    console.log(event);
+    const copy = Object.assign({}, this.employee);
+    this.employeeServce.addEmployee(copy);
   }
 }
